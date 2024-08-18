@@ -1,6 +1,58 @@
 # Lista de palabras posibles para el juego.
 word_list = ["doctor", "murcielago", "ornitorrinco"]
 
+hangmanimg = ['''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========''']
+
+
 # Importamos el módulo random para seleccionar una palabra aleatoria de la lista.
 import random
 chosen_word = random.choice(word_list)
@@ -9,7 +61,7 @@ chosen_word = random.choice(word_list)
 display = ["_" for _ in chosen_word]
 
 # Número de intentos permitidos.
-attempts = len(chosen_word) + 3
+attempts = 6
 print(" ".join(display))
 print(f"Tu palabra tiene {len(chosen_word)} letras.")
 # Mientras queden intentos y la palabra no esté completamente adivinada.
@@ -28,6 +80,7 @@ while attempts > 0 and "_" in display:
         print("Mal")
         # Reducimos el número de intentos si la adivinanza es incorrecta.
         attempts -= 1
+    print(f"{hangmanimg[attempts]}")
 
     # Imprimimos la representación actualizada de la palabra.
     print(" ".join(display))
