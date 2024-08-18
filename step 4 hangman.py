@@ -62,6 +62,7 @@ display = ["_" for _ in chosen_word]
 
 # Número de intentos permitidos.
 attempts = 6
+indicador = 0
 print(" ".join(display))
 print(f"Tu palabra tiene {len(chosen_word)} letras.")
 # Mientras queden intentos y la palabra no esté completamente adivinada.
@@ -80,12 +81,13 @@ while attempts > 0 and "_" in display:
         print("Mal")
         # Reducimos el número de intentos si la adivinanza es incorrecta.
         attempts -= 1
-    print(f"{hangmanimg[attempts]}")
+        indicador +=1
+
+    print(hangmanimg[indicador])
 
     # Imprimimos la representación actualizada de la palabra.
     print(" ".join(display))
     # Mostramos los intentos restantes.
-    print(f"Intentos faltantes: {attempts}")
 
 # Verificamos si el usuario ha ganado o perdido.
 if "_" not in display:
