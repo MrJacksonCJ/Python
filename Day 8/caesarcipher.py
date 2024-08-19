@@ -11,7 +11,7 @@ def codificar(texto_codificado, clave):
         for letra_2 in alphabet:
             if letra == letra_2:
                     indice = alphabet.index(letra_2)
-                    numero_clave= indice + shift
+                    numero_clave= (indice + shift) % len(alphabet) #resolver debordamiento cuando sea y y z 
                     texto_encriptado += alphabet[numero_clave]
     print(texto_encriptado)
 
