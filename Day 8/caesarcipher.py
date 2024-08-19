@@ -8,9 +8,8 @@ shift = int(input("Escriba el numero de diferencia:\n"))
 def codificar(texto_codificado, clave):
     texto_encriptado = ""
     for letra in text:
-        for letra_2 in alphabet:
-            if letra == letra_2:
-                    indice = alphabet.index(letra_2)
+        if letra in alphabet: # se resuelve bucles inecesarios, mas efectivo el programa
+                    indice = alphabet.index(letra)
                     numero_clave= (indice + shift) % len(alphabet) #resolver debordamiento cuando sea y y z 
                     texto_encriptado += alphabet[numero_clave]
     print(texto_encriptado)
