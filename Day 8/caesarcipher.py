@@ -14,6 +14,22 @@ def codificar(texto_codificado, clave):
                     texto_encriptado += alphabet[numero_clave]
     print(texto_encriptado)
 
+def decodificar(texto_codificado, clave):
+    texto_encriptado = ""
+    for letra in text:
+        if letra in alphabet: # se resuelve bucles inecesarios, mas efectivo el programa
+                    indice = alphabet.index(letra)
+                    numero_clave= (indice - shift) % len(alphabet) #resolver debordamiento cuando sea y y z 
+                    texto_encriptado += alphabet[numero_clave]
+    print(texto_encriptado)
 
 
-codificar(text, shift)
+def cifrado_cesar():
+    if direction == "codificar":
+        codificar(text, shift)
+    elif direction == "decodificar":
+        decodificar(text, shift)
+    else:
+        print("Intenta de nuevo")
+
+cifrado_cesar(direction)
