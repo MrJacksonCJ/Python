@@ -1,6 +1,6 @@
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n' ,'ñ','o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-direction = input("Escriba 'codificar' o 'descodificar' para hacer el mensaje:\n").lower()
+direction = input("Escriba 'codificar' o 'decodificar' para hacer el mensaje:\n").lower()
 text = input("Escriba su mensaje:\n").lower()
 shift = int(input("Escriba el numero de diferencia:\n"))
 
@@ -24,10 +24,10 @@ def decodificar(texto_codificado, clave):
     print(texto_encriptado)
 
 
-def cifrado_cesar():
-    if direction == "codificar":
+def cifrado_cesar(entrada):
+    if entrada == "codificar":
         codificar(text, shift)
-    elif direction == "decodificar":
+    elif entrada == "decodificar":
         decodificar(text, shift)
     else:
         print("Intenta de nuevo")
