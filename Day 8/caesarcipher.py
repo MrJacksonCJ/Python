@@ -1,6 +1,6 @@
+import art
+
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n' ,'ñ','o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-
-
 
 def cifrado_cesar(entrada, texto_original, clave):
     if entrada == "decodificar":
@@ -17,7 +17,7 @@ def cifrado_cesar(entrada, texto_original, clave):
     print(f"Este es el texto {entrada}:\n {texto_encriptado}")
 
 decision = "si"
-
+print(art.logo)
 while decision == "si": # se agrega para mantener el programa corriendo por si se necesita hacer algo mas
     direction = input("Escriba 'codificar' o 'decodificar' para hacer el mensaje:\n").lower()
     if direction == "codificar" or direction == "decodificar":
