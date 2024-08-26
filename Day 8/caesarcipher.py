@@ -1,8 +1,6 @@
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n' ,'ñ','o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-direction = input("Escriba 'codificar' o 'decodificar' para hacer el mensaje:\n").lower()
-text = input("Escriba su mensaje:\n").lower()
-shift = int(input("Escriba el numero de diferencia:\n"))
+
 
 def cifrado_cesar(entrada, texto_original, clave):
     if entrada == "decodificar":
@@ -13,6 +11,19 @@ def cifrado_cesar(entrada, texto_original, clave):
                     indice = alphabet.index(letra)
                     numero_clave= (indice + clave) % len(alphabet) #resolver debordamiento cuando sea y y z 
                     texto_encriptado += alphabet[numero_clave]
-    print(texto_encriptado)
+        else:
+            texto_encriptado += letra #se agrega para que no codifique espacios ni letras ni simbolos
 
-cifrado_cesar(direction, text, shift)
+    print(f"Este es el texto {entrada}:\n {texto_encriptado}")
+
+decision = "si"
+
+while decision == "si": # se agrega para mantener el programa corriendo por si se necesita hacer algo mas
+    direction = input("Escriba 'codificar' o 'decodificar' para hacer el mensaje:\n").lower()
+    if direction == "codificar" or direction == "decodificar":
+        text = input("Escriba su mensaje:\n").lower()
+        shift = int(input("Escriba el numero de diferencia:\n"))
+        cifrado_cesar(direction, text, shift)
+        decision = input("Quieres seguir? Escribe 'si' o 'no': \n").lower()
+    else:
+        print("Lo que escribiste no tiene nada que ver")
