@@ -1,76 +1,73 @@
-import art
 import random
+import art
 
-def calculo():
-    suma_cards = 0
-    for i in user_cards:
-        suma_cards += i
-    maquina = pc_cards[0]
-    print(f"         Tus cartas: {user_cards}, suma actual: {suma_cards}")
-    print (f"         Primera carta de la maquina: [{maquina}]")
+def sacar_carta():
+    return random.choice(cards)
 
-def Final():
-    suma_cards = 0
-    suma_cards2 = 0
-    for i in user_cards:
-        suma_cards += i
-    for i in pc_cards:
-        suma_cards2 += i
-    if suma_cards <= 17:
-        print("Debes escojer  otra carta")
-        return 0
-    elif suma_cards2 <= 17 :
-        pc_cards.append(rand_card())
+def repartir_carta():
+    for i in range(2):
+        user_cards.append(sacar_carta())
+        pc_cards.append(sacar_carta())
 
+def calculo_suma(suma):
+    return sum(suma)
 
-    print(f"         Tus cartas: {user_cards}, Tu  suma: [{suma_cards}]")
-    print (f"         Cartas de la maquina {pc_cards}, Suma de la maquina: [{suma_cards2}]")
-    if suma_cards > 21:
-        print(f"Perdiste tu maso suma {suma_cards} y el de el pc {suma_cards2}, por lo tanto la casa gana. ")
-    elif suma_cards2 > 21:
-        print(f"Ganaste tu maso suma {suma_cards} y el de el pc {suma_cards2}. ")
-    elif suma_cards2 > suma_cards:
-        print(f"Perdiste tu maso suma {suma_cards} y el de el pc {suma_cards2}, por lo tanto la casa gana. ")
-    elif suma_cards2 <= 17 :
-        pc_cards.append(rand_card())
-        Final()
-    else:
-        print(f"Ganaste tu maso suma {suma_cards} y el de el pc {suma_cards2}. ")
+def suma_pccards():
+    suma_pc = calculo_suma(pc_cards)
+    while suma_pc < 17:
+        pc_cards.append(sacar_carta())
+        suma_pc = calculo_suma(pc_cards)
 
-def rand_card():
-    ini_card = random.choice(cards)
-    return ini_card
-
-print(art.logo)
-
-cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-user_cards = []
-pc_cards = []
-
-rand_blackjack = True
-
-while rand_blackjack:
-    if len(user_cards) == 0 or len(user_cards) == 1 :
-        user_cards.append(rand_card())
-    if len(pc_cards) == 0 or len(pc_cards) == 1 :
-        pc_cards.append(rand_card())
-    if len(user_cards) == 2 and len(pc_cards) == 2:
-        rand_blackjack = False
+def final():
+    suma_pccards()
+    suma_user = calculo_suma(user_cards)
+    suma_pc = calculo_suma(pc_cards)
+    while suma_user < 17:
+        maso_bajo = input("Te recomendamos sacar otra carta quieres sacarla? 's' o 'n':").lower()
+        if maso_bajo == "s":
+            user_cards.append(sacar_carta())
+            suma_user = calculo_suma(user_cards)
+    print(f"Tus barajas son {user_cards} y la suma de tus cartas es {suma_user}")
+    print(f"Las barajas de la casa son {pc_cards} y la suma es {suma_pc}")
+    if suma_pc == suma_user:
+        print("Empate")
+    elif suma_pc == 21:
+        print("la casa gana")
+    elif suma_user == 21:
+        print("Tu ganas")
+    elif suma_user > 21:
+        print("Bust.La casa gana. ")
+    elif suma_pc > 21:
+        print("Tu ganas")
+    elif suma_user < suma_pc:
+        print("La casa gana")
+    elif suma_pc < suma_user:
+        print("Tu ganas")
 
 
-intento = True
-calculo()
-while intento:
-    o_intento = input("Escribe 's' para sacar otra carta, 'n' para pasar:").lower()
+def blackjack():
+    while True:
+        print(f"Tus cartas son {user_cards} y suma {calculo_suma(user_cards)}")
+        print(f"Las primera carta del pc es [{pc_cards[0]}] ")
+        otra_carta = input("Quieres otra carta escribe 's' si pasas escribe 'n': ").lower()
 
-    if o_intento == "s":
-        user_cards.append(rand_card())
-        calculo()
-    elif o_intento == "n":
-        de_nuevo = Final()
-        if de_nuevo == 0:
-             intento = True
+        if otra_carta == "s":
+            user_cards.append(sacar_carta())
         else:
-            intento = False
+            final()
+            break
+
+
+global user_cards, pc_cards,cards
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+while True:
+    user_cards = []
+    pc_cards = []
+    print(art.logo)
+    repartir_carta()
+    blackjack()
+    de_nuevo = input("Quieres jugar de nuevo? 's' o 'n'").lower()
+    if de_nuevo == "s":
+        print("\n" *20)
     else:
-        print("El valor ingresado no es valido")
+        break
