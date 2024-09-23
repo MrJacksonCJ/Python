@@ -32,4 +32,5 @@ while intentos != 0:
     else:
         if intentos >=1:
           print("Intenta de nuevo")
-print("Ya no tienes mas intentos")
+if intentos== 0:
+    print("Ya no tienes mas intentos")
